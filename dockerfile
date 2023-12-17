@@ -7,6 +7,7 @@ RUN tar xvf duoauthproxy-latest-src.tgz -C /src/
 RUN cd /src/duoauthproxy-* && make && mv duoauthproxy-build /src/duoauthproxy-build
 
 FROM debian:stable-slim AS app1
+RUN apt update && apt upgrade -y && apt-get clean
 RUN --mount=type=cache,from=builder,source=/src/duoauthproxy-build,target=/src/duoauthproxy-build ./src/duoauthproxy-build/install --install-dir /opt/duoauthproxy --service-user duo_authproxy_svc --log-group duo_authproxy_grp --create-init-script yes
 
 VOLUME /opt/duoauthproxy/conf /opt/duoauthproxy/log
