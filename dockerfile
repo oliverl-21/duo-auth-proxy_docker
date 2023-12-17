@@ -1,5 +1,5 @@
 FROM debian:stable-slim as base
-RUN apt update && apt upgrade -y && apt-get c
+RUN apt update && apt upgrade -y && apt-get clean
 
 FROM base AS builder
 RUN apt update && apt install wget python3-pip build-essential libssl-dev libffi-dev -y && apt-get clean 
