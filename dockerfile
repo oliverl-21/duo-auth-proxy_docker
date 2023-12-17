@@ -1,4 +1,4 @@
-FROM debian:stable-slin as base
+FROM debian:stable-slim as base
 RUN apt update && apt upgrade -y && apt-get c
 
 FROM base AS builder
