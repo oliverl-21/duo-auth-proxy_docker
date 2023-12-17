@@ -5,4 +5,4 @@ Base Image: https://hub.docker.com/_/debian `debian:stable-slim`
 
 Usage:
 
-Mount your `authproxy.cfg` in `/opt/duoauthproxy/conf`
+Mount your `authproxy.cfg` in `/opt/duoauthproxy/conf` otherwise the container fails to start
