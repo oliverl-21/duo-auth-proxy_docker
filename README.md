@@ -4,9 +4,9 @@
 - [Issues](https://github.com/oliverl-21/duo-auth-proxy_docker/issues)
 
 Builds Container for DUO Auth Proxy based on latest version.
-Reference: https://duo.com/docs/authproxy-reference#overview
+- Reference: https://duo.com/docs/authproxy-reference#overview
 
-Base Image: https://hub.docker.com/_/debian `debian:stable-slim`
+Base Image: `debian:stable-slim`
 
 ## Usage:
 
@@ -40,3 +40,8 @@ duo-auth-proxy:
       - 1812:1812/udp
       - 1813:1813/udp 
 ```
+
+## To-Do:
+
+- if DUO fixes the dependencies switch to `alpine:3` as Base image.
+- publish `aarch64` version
