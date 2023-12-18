@@ -1,3 +1,4 @@
+# Multi-Stage build
 FROM debian:stable-slim as base
 RUN apt update && apt upgrade -y && apt-get clean
 
