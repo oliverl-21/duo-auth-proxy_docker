@@ -9,7 +9,7 @@ Base Image: https://hub.docker.com/_/debian `debian:stable-slim`
 Mount your `authproxy.cfg` in `/opt/duoauthproxy/conf` otherwise the container fails to start
 for Container logs to work the logging secion in `[main]`has to be setup correctly
 
-```
+```ini
 [main]
 debug=true # true for debugging, otherwise set to false
 log_max_files=10
