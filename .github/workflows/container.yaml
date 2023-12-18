@@ -36,12 +36,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           tags: oliverl21/duo-auth-proxy:latest
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
 
       - name: Build and Push Image
         uses: docker/build-push-action@v5
         with:
           tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.builddate }}
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
