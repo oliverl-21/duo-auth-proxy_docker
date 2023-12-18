@@ -44,5 +44,5 @@ duo-auth-proxy:
 
 ## To-Do:
 
-- if DUO fixes the dependencies switch to `alpine:3` as Base image.
-- publish `aarch64` version
+- [ ] if DUO fixes the dependencies switch to `alpine:3` as Base image.
+- [x] publish `aarch64` version
