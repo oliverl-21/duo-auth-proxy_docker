@@ -3,7 +3,7 @@
 - [Repo](https://github.com/oliverl-21/duo-auth-proxy_docker)
 - [Issues](https://github.com/oliverl-21/duo-auth-proxy_docker/issues)
 
-Builds Container for DUO Auth Proxy based on latest version.
+Builds Container for DUO Authproxy based on latest version.
 - Reference: https://duo.com/docs/authproxy-reference#overview
 - Base Image: `debian:stable-slim`
 
