@@ -1,3 +1,4 @@
+ARG duoversion=latest
 # Multi-Stage build
 FROM debian:stable-slim as base
 RUN apt update && apt upgrade -y && apt-get clean
@@ -14,4 +15,5 @@ LABEL org.opencontainers.image.documentation="https://github.com/oliverl-21/duo-
 LABEL org.opencontainers.image.source="https://github.com/oliverl-21/duo-auth-proxy_docker"
 LABEL org.opencontainers.image.url="https://github.com/oliverl-21/duo-auth-proxy_docker"
 LABEL org.opencontainers.image.description="DUO Authproxy in Docker"
+LABEL org.opencontainers.image.version=${duoversion}
 ENTRYPOINT ["/opt/duoauthproxy/bin/authproxy"]
