@@ -22,7 +22,7 @@ jobs:
       - id: version
         name: "Set DUO APP Version env"
         run: |
-          echo "version=$(curl https://dl.duosecurity.com/authproxy_version.json | jq '.releases | keys | max')" >> $GITHUB_OUTPUT
+          echo "version=$(curl https://dl.duosecurity.com/authproxy_version.json | jq -r '.releases | keys | max')" >> $GITHUB_OUTPUT
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
