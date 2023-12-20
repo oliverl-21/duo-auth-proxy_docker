@@ -10,5 +10,8 @@ RUN cd /src/duoauthproxy-* && make && mv duoauthproxy-build /src/duoauthproxy-bu
 
 FROM base as app
 RUN --mount=type=cache,from=builder,source=/src/duoauthproxy-build,target=/src/duoauthproxy-build ./src/duoauthproxy-build/install --install-dir /opt/duoauthproxy --service-user duo_authproxy_svc --log-group duo_authproxy_grp --create-init-script yes
-
+LABEL org.opencontainers.image.documentation="https://github.com/oliverl-21/duo-auth-proxy_docker"
+LABEL org.opencontainers.image.source="https://github.com/oliverl-21/duo-auth-proxy_docker"
+LABEL org.opencontainers.image.url="https://github.com/oliverl-21/duo-auth-proxy_docker"
+LABEL org.opencontainers.image.description="DUO Authproxy in Docker"
 ENTRYPOINT ["/opt/duoauthproxy/bin/authproxy"]
