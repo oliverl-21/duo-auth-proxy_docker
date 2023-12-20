@@ -17,10 +17,12 @@ For Container logs to work the logging secion in `[main]`has to be setup correct
 ### authproxy.cfg
 ```ini
 [main]
-debug=true # true for debugging, otherwise set to false
+# true for debugging, otherwise set to false
+debug=true
 log_max_files=10
 log_max_size=20971520
-log_stdout=true # has to be true for container logs
+# has to be true for container logs
+log_stdout=true
 
 ```
 
