@@ -1,10 +1,11 @@
-ARG DUOVERSION=latest
 ARG BASEIMAGE=debian:stable-slim
+
 # Multi-Stage build
 FROM ${BASEIMAGE} as base
 RUN apt update && apt upgrade -y && apt-get clean
 
 FROM base AS builder
+ARG DUOVERSION=latest
 RUN apt update && apt install wget python3-pip build-essential libssl-dev libffi-dev -y && apt-get clean
 RUN mkdir /src && wget https://dl.duosecurity.com/duoauthproxy-$DUOVERSION-src.tgz
 RUN tar xvf duoauthproxy-$DUOVERSION-src.tgz -C /src/
