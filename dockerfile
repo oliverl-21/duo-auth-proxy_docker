@@ -12,11 +12,13 @@ RUN tar xvf duoauthproxy-$DUOVERSION-src.tgz -C /src/
 RUN cd /src/duoauthproxy-* && make && mv duoauthproxy-build /src/duoauthproxy-build
 
 FROM base as app
+ARG DUOVERSION=latest
 RUN --mount=type=cache,from=builder,source=/src/duoauthproxy-build,target=/src/duoauthproxy-build ./src/duoauthproxy-build/install --install-dir /opt/duoauthproxy --service-user duo_authproxy_svc --log-group duo_authproxy_grp --create-init-script yes
 LABEL org.opencontainers.image.documentation="https://github.com/oliverl-21/duo-auth-proxy_docker"
 LABEL org.opencontainers.image.source="https://github.com/oliverl-21/duo-auth-proxy_docker"
 LABEL org.opencontainers.image.url="https://github.com/oliverl-21/duo-auth-proxy_docker"
 LABEL org.opencontainers.image.description="DUO Authproxy in Docker"
 LABEL org.opencontainers.image.version="$DUOVERSION"
+LABEL org.opencontainers.image.title="authproxy"
 
 ENTRYPOINT ["/opt/duoauthproxy/bin/authproxy"]
