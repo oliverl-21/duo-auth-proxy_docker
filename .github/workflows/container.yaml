@@ -41,4 +41,5 @@ jobs:
           tags: oliverl21/duo-auth-proxy:latest,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ steps.date.outputs.builddate }}
           platforms: linux/amd64,linux/arm64
           push: true
-          build-args: duoversion=${{ steps.version.outputs.version }}
+          build-args: |
+            DUOVERSION=${{ steps.version.outputs.version }}
