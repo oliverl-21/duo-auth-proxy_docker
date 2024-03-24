@@ -32,7 +32,7 @@ log_stdout=true
 ---
 version: '3'
 services:
-duo-auth-proxy:
+  duo-auth-proxy:
     image: oliverl21/duo-auth-proxy
     container_name: duo-authproxy
     restart: always
