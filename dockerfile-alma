@@ -22,4 +22,3 @@ LABEL org.opencontainers.image.version="$DUOVERSION"
 LABEL org.opencontainers.image.title="authproxy"
 
 ENTRYPOINT ["/opt/duoauthproxy/bin/authproxy"]
-
