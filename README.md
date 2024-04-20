@@ -4,6 +4,7 @@
 - [Issues](https://github.com/oliverl-21/duo-auth-proxy_docker/issues)
 
 Builds Container for DUO Authproxy based on latest version.
+
 - Reference: https://duo.com/docs/authproxy-reference#overview
 - Base Image: `debian:stable-slim`
 
@@ -15,6 +16,7 @@ Mount your `authproxy.cfg` in `/opt/duoauthproxy/conf` otherwise the container f
 For Container logs to work the logging secion in `[main]`has to be setup correctly
 
 ### authproxy.cfg
+
 ```ini
 [main]
 # true for debugging, otherwise set to false
@@ -38,13 +40,14 @@ services:
     restart: always
     volumes:
       - /opt/docker/duo-authproxy/log:/opt/duoauthproxy/log
-      - /opt/docker/duo-authproxy/conf/authproxy.cfg:/opt/duoauthproxy/conf/authproxy.cfg 
+      - /opt/docker/duo-authproxy/conf/authproxy.cfg:/opt/duoauthproxy/conf/authproxy.cfg
     ports:
       - 1812:1812/udp
-      - 1813:1813/udp 
+      - 1813:1813/udp
 ```
 
 ## To-Do:
 
 - [ ] if DUO fixes the dependencies switch to `alpine:3` as Base image.
 - [x] publish `aarch64` version
+- [x] publish image with `alma:minimal`
