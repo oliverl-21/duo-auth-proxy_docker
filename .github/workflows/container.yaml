@@ -48,7 +48,7 @@ jobs:
       - name: Build and Push Image Alma
         uses: docker/build-push-action@v5
         with:
-          tags: oliverl21/duo-auth-proxy:latest,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ steps.date.outputs.builddate }}
+          tags: oliverl21/duo-auth-proxy:latest-alma,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ steps.date.outputs.builddate }}
           file: ./dockerfile-alma
           platforms: linux/amd64,linux/arm64
           push: true
