@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
           registry: docker.io
       - name: Build and Push Image Debian
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: oliverl21/duo-auth-proxy:latest,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ steps.date.outputs.builddate }}
           file: ./dockerfile-debian
@@ -46,7 +46,7 @@ jobs:
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
       - name: Build and Push Image Alma
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: oliverl21/duo-auth-proxy:latest-alma,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ steps.date.outputs.builddate }}
           file: ./dockerfile-alma
