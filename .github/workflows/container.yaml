@@ -52,5 +52,7 @@ jobs:
           file: ./dockerfile-alma
           platforms: linux/amd64,linux/arm64
           push: true
+          cache-from: type=gha
+          cache-to: 'type=gha,mode=max'
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
