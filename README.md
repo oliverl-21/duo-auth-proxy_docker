@@ -6,7 +6,7 @@
 Builds Container for DUO Authproxy based on latest version.
 
 - Reference: https://duo.com/docs/authproxy-reference#overview
-- Base Image: `debian:stable-slim`
+- Base Image: `debian:stable-slim`, `alma`
 
 The Container is build weekly with the latest DUO Authproxy version and Container Image updates.
 
