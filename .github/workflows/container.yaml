@@ -46,8 +46,8 @@ jobs:
           file: ./dockerfile-debian
           platforms: linux/amd64,linux/arm64
           push: true
-          cache-from: type=gha
-          cache-to: 'type=gha,mode=max'
+          cache-from: "type=gha,scope=debian"
+          cache-to: "type=gha,mode=max,scope=debian"
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
       - name: Build and Push Image Alma
@@ -57,7 +57,7 @@ jobs:
           file: ./dockerfile-alma
           platforms: linux/amd64,linux/arm64
           push: true
-          cache-from: type=gha
-          cache-to: 'type=gha,mode=max'
+          cache-from: "type=gha,scope=alma"
+          cache-to: "type=gha,mode=max,scope=alma"
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}

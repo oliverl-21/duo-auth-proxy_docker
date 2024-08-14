@@ -1,7 +1,7 @@
 ARG BASEIMAGE=debian:stable-slim
 
 # Multi-Stage build
-FROM ${BASEIMAGE} as base
+FROM ${BASEIMAGE} AS base
 RUN apt update && apt upgrade -y && apt-get clean
 
 FROM base AS builder
@@ -11,7 +11,7 @@ RUN mkdir /src && wget https://dl.duosecurity.com/duoauthproxy-$DUOVERSION-src.t
 RUN tar xvf duoauthproxy-$DUOVERSION-src.tgz -C /src/
 RUN cd /src/duoauthproxy-* && make && mv duoauthproxy-build /src/duoauthproxy-build
 
-FROM base as app
+FROM base AS app
 ARG DUOVERSION=latest
 RUN --mount=type=cache,from=builder,source=/src/duoauthproxy-build,target=/src/duoauthproxy-build ./src/duoauthproxy-build/install --install-dir /opt/duoauthproxy --service-user duo_authproxy_svc --log-group duo_authproxy_grp --create-init-script yes
 LABEL org.opencontainers.image.documentation="https://github.com/oliverl-21/duo-auth-proxy_docker"
