@@ -1,0 +1,21 @@
+name: Clean old Cache
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 0 * * 0"
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+    steps:
+      # Do other steps like checkout, install, compile, etc.
+      - uses: MyAlbum/purge-cache@v2
+        with:
+          accessed: false # Purge caches by their last accessed time (default)
+          created: true # Purge caches by their created time (default)
+          max-age: 1209600 # Leave only caches accessed in the last 7 days (default)
