@@ -2,7 +2,7 @@ ARG BASEIMAGE=almalinux:minimal
 
 # Multi-Stage build
 FROM ${BASEIMAGE} AS base
-RUN microdnf update --refresh -y --nobest --nodocs --noplugins --setopt=install_weak_deps=0 && microdnf install shadow-utils -y --nobest --nodocs --noplugins --setopt=install_weak_deps=0 && microdnf clean all
+RUN microdnf update --refresh -y --nobest --nodocs --noplugins --setopt=install_weak_deps=0 && microdnf install shadow-utils -y --nobest --nodocs --noplugins --setopt=install_weak_deps=0 && microdnf clean all && python3 -m pip install --no-cache-dir --upgrade pip
 # Builder Process
 FROM base AS builder
 ARG DUOVERSION=latest
