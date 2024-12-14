@@ -1,4 +1,4 @@
-# Cisco DUO Authproxy 6.4.1
+# Cisco DUO Authproxy 6.4.2
 
 - [Repo](https://github.com/oliverl-21/duo-auth-proxy_docker)
 - [Issues](https://github.com/oliverl-21/duo-auth-proxy_docker/issues)
