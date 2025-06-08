@@ -15,7 +15,7 @@ on:
 jobs:
   build:
     name: Build image
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
         platform: [amd64, arm64]
