@@ -2,6 +2,8 @@ name: Build Multi-arch Image
 permissions:
   actions: write
   contents: read
+  id-token: write
+  attestations: write
 on:
   workflow_dispatch:
     branches:
@@ -58,6 +60,8 @@ jobs:
           file: dockerfile-debian
           provenance: mode=max
           platforms: linux/${{ matrix.platform }}
+          provenance: mode=max
+          sbom: true
           push: true
           cache-from: type=gha,scope=debian-${{ matrix.platform }}
           cache-to: type=gha,mode=max,scope=debian-${{ matrix.platform }}
@@ -71,6 +75,7 @@ jobs:
           file: dockerfile-alma
           platforms: linux/${{ matrix.platform }}
           provenance: mode=max
+          sbom: true
           push: true
           cache-from: type=gha,scope=alma-${{ matrix.platform }}
           cache-to: type=gha,mode=max,scope=alma-${{ matrix.platform }}
