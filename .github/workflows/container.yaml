@@ -56,6 +56,7 @@ jobs:
           context: "{{defaultContext}}:docker"
           tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ github.sha }}-${{ matrix.platform }}
           file: dockerfile-debian
+          provenance: mode=max
           platforms: linux/${{ matrix.platform }}
           push: true
           cache-from: type=gha,scope=debian-${{ matrix.platform }}
@@ -69,6 +70,7 @@ jobs:
           tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ github.sha }}-${{ matrix.platform }}
           file: dockerfile-alma
           platforms: linux/${{ matrix.platform }}
+          provenance: mode=max
           push: true
           cache-from: type=gha,scope=alma-${{ matrix.platform }}
           cache-to: type=gha,mode=max,scope=alma-${{ matrix.platform }}
