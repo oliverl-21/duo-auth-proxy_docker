@@ -16,6 +16,11 @@ jobs:
   build:
     name: Build image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+          - amd64
+          - arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,10 +49,10 @@ jobs:
         with:
           tags: oliverl21/duo-auth-proxy:latest,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ steps.date.outputs.builddate }}
           file: ./dockerfile-debian
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/${{ matrix.platform }}
           push: true
-          cache-from: "type=gha,scope=debian"
-          cache-to: "type=gha,mode=max,scope=debian"
+          cache-from: type=gha,scope=debian-${{ matrix.platform }}
+          cache-to: type=gha,mode=max,scope=debian-${{ matrix.platform }}
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
       - name: Build and Push Image Alma
@@ -55,9 +60,9 @@ jobs:
         with:
           tags: oliverl21/duo-auth-proxy:latest-alma,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ steps.date.outputs.builddate }}
           file: ./dockerfile-alma
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/${{ matrix.platform }}
           push: true
-          cache-from: "type=gha,scope=alma"
-          cache-to: "type=gha,mode=max,scope=alma"
+          cache-from: type=gha,scope=alma-${{ matrix.platform }}
+          cache-to: type=gha,mode=max,scope=alma-${{ matrix.platform }}
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
