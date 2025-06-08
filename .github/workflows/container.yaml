@@ -1,7 +1,7 @@
 name: Build Multi-arch Image
 permissions:
-      actions: write
-      contents: read
+  actions: write
+  contents: read
 on:
   workflow_dispatch:
     branches:
