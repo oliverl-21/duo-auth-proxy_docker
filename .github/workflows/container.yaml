@@ -58,7 +58,6 @@ jobs:
           context: "{{defaultContext}}:docker"
           tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ github.sha }}-${{ matrix.platform }}
           file: dockerfile-debian
-          provenance: mode=max
           platforms: linux/${{ matrix.platform }}
           provenance: mode=max
           sbom: true
