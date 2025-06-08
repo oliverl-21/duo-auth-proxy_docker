@@ -6,14 +6,12 @@ services:
     volumes:
       - ./log:/opt/duoauthproxy/log
       - ./conf/authproxy.cfg:/opt/duoauthproxy/conf/authproxy.cfg
-      - ./entrypoint:/opt/duoauthproxy/entrypoint
       - ./etc/duoauthproxy:/etc/duoauthproxy
     ports:
       - 1812:1812/udp
       - 1813:1813/udp
     networks:
       - duoproxy
-    entrypoint: /opt/duoauthproxy/entrypoint/entrypoint.sh
     secrets:
       - duo_enrollment_key
 
