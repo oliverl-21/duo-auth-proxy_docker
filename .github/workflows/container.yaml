@@ -94,8 +94,9 @@ jobs:
 
       - name: Create SHA manifest and push
         run: |
-          docker buildx imagetools create \
-            oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ steps.date.outputs.builddate}} \
+          docker buildx imagetools create -t \
+            oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ steps.date.outputs.builddate}} -t \
+            oliverl21/duo-auth-proxy:latest \
             oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ github.sha }}-amd64 \
             oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ github.sha }}-arm64
 
