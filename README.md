@@ -39,7 +39,7 @@ log_stdout=true
 
 ### Docker-compose
 
-```
+```yaml
 services:
   duo-auth-proxy:
     image: oliverl21/duo-auth-proxy
