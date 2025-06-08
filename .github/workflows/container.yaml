@@ -24,17 +24,17 @@ jobs:
             runner: ubuntu-24.04
           - platform: arm64
             runner: ubuntu-24.04-arm
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: "Set current date as env variable"
-        run: |
-          echo "builddate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
-        id: date # this is used on variable path
+
       - id: version
         name: "Set DUO APP Version env"
         run: |
           echo "version=$(curl https://dl.duosecurity.com/authproxy_version.json | jq -r '.releases | keys | max')" >> $GITHUB_OUTPUT
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
@@ -50,7 +50,7 @@ jobs:
       - name: Build and Push Image Debian
         uses: docker/build-push-action@v6
         with:
-          tags: oliverl21/duo-auth-proxy:latest,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ steps.date.outputs.builddate }}
+          tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-${{ github.sha }}-${{ matrix.platform }}
           file: ./dockerfile-debian
           platforms: linux/${{ matrix.platform }}
           push: true
@@ -61,7 +61,7 @@ jobs:
       - name: Build and Push Image Alma
         uses: docker/build-push-action@v6
         with:
-          tags: oliverl21/duo-auth-proxy:latest-alma,oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ steps.date.outputs.builddate }}
+          tags: oliverl21/duo-auth-proxy:${{ steps.version.outputs.version }}-alma-${{ github.sha }}-${{ matrix.platform }}
           file: ./dockerfile-alma
           platforms: linux/${{ matrix.platform }}
           push: true
@@ -69,3 +69,34 @@ jobs:
           cache-to: type=gha,mode=max,scope=alma-${{ matrix.platform }}
           build-args: |
             DUOVERSION=${{ steps.version.outputs.version }}
+
+  create-manifests:
+    runs-on: [ubuntu-latest]
+    needs: [build]
+
+    steps:
+      - name: "Set current date as env variable"
+        run: |
+          echo "builddate=$(date +'%Y%m%d')" >> $GITHUB_OUTPUT
+        id: date # this is used on variable path
+        
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        
+      - name: Login to container registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
+          registry: docker.io
+
+      - name: Create SHA manifest and push
+        run: |
+          docker manifest create \
+            oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ steps.date.outputs.date}} \
+            --amend oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ github.sha }}-amd64 \
+            --amend oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ github.sha }}-arm64
+          docker manifest push oliverl21/duo-auth-proxy:${{ needs.build.outputs.version }}-${{ steps.date.outputs.date}}
+
