@@ -1,5 +1,6 @@
 name: Clean old Cache
-
+permissions:
+  actions: write
 on:
   workflow_dispatch:
     branches:
