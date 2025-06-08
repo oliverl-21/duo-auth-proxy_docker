@@ -18,9 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform:
-          - amd64
-          - arm64
+        platform: [amd64, arm64]
+        include:
+          - platform: amd64
+            runner: ubuntu-latest
+          - platform: arm64
+            runner: ubuntu-latest-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
