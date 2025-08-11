@@ -1,4 +1,4 @@
-ARG BASEIMAGE=debian:stable-slim
+ARG BASEIMAGE=debian:trixie-slim
 
 # Multi-Stage build
 FROM ${BASEIMAGE} AS base
