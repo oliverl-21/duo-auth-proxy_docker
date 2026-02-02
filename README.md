@@ -32,6 +32,7 @@ For Container logs to work the logging secion in `[main]`has to be setup correct
 debug=true
 log_max_files=10
 log_max_size=20971520
+
 # has to be true for container logs
 log_stdout=true
 
